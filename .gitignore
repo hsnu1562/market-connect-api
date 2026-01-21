@@ -1,0 +1,9 @@
+# Ignore the environment file containing secrets
+.env
+
+# Ignore Python compiled files (clutter)
+__pycache__/
+*.pyc
+
+# Ignore macOS clutter
+.DS_Store
