@@ -22,7 +22,7 @@ It allows you to create different coding environment for different projects, pre
     conda init shell
     ```
 
-3.  test the conda commands by typing the command in command shell
+4.  test the conda commands by typing the command in command shell
     ```
     conda --version
     ```
