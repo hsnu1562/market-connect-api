@@ -40,7 +40,7 @@ def get_stalls( conn = Depends(get_db_connection) ):
         return stalls
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching stalls: {e}")
-    
+
 @app.post("/book")
 def book_stall( request: BookingRequest, conn = Depends(get_db_connection) ):
     cursor = conn.cursor()

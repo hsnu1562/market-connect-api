@@ -7,11 +7,16 @@ load_dotenv()
 conn = pg2.connect(os.getenv("DATABASE_URL"))
 cur = conn.cursor()
 
-print("Inserting test stall...")
+# 1. Create a dummy user (User ID 1)
+print("Creating User...")
+cur.execute("INSERT INTO users (line_uid, name) VALUES ('U12345', 'Test User') ON CONFLICT DO NOTHING;")
+
+# 2. Create a time slot for Stall ID 1 (Slot ID will be auto-generated, likely 1)
+print("Creating Time Slot...")
 cur.execute("""
-    INSERT INTO stalls (location_name, lat, long, facilities, owner_id)
-    VALUES ('Taipei Night Market - Entrance A', 25.0330, 121.5654, 'Water, Electricity', 1);
+    INSERT INTO availability (stall_id, date, price, status) 
+    VALUES (1, '2026-02-01', 500, 0); 
 """)
+
 conn.commit()
-print("Done!")
-conn.close()
+print("Data ready!")
