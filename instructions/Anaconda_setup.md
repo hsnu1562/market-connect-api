@@ -71,7 +71,7 @@ It allows you to create different coding environment for different projects, pre
     pip install fastapi "uvicorn[standard]"
     ```
 - psql
-    for windows:
+    for windows:\n
     go to [official website of PostgreSQL][PSQL_link] and install the version 18.1 for windows
 
     [PSQL_link]:https://www.postgresql.org/download/windows/
