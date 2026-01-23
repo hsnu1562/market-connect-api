@@ -101,7 +101,8 @@ def get_availability( conn = Depends(get_db_connection) ):
         SELECT 
             a.slot_id, 
             a.date,
-            a.price
+            a.price,
+            a.status
         FROM availability a
         JOIN stalls s ON a.stall_id = s.stall_id
         WHERE a.status = 0;

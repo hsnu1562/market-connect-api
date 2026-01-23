@@ -1,7 +1,7 @@
 # Database Tables
 this file tells you about the name, purpose, and the contents for each db tables
 
-## all db tables
+## all DB tables
 - users (communication info and reputation)
 - stalls (location, facilities, and owner)
 - availability (time and price)
