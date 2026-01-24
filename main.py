@@ -113,3 +113,35 @@ def get_availability( conn = Depends(get_db_connection) ):
         return slots
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching availability: {e}")
+    
+
+class CreateUserRequest(BaseModel):
+    line_uid: str
+    name: str
+
+@app.post("/create_user")
+def create_user( user: CreateUserRequest, conn = Depends(get_db_connection) ):
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            """
+            INSERT INTO users (line_uid, name) 
+            VALUES (%s, %s) 
+            RETURNING user_id;
+            """,
+            (user.line_uid, user.name)
+        )
+        new_user_id = cursor.fetchone()['user_id']
+        conn.commit()
+        return {
+            "status": "success",
+            "message": "User created successfully!",
+            "user_id": new_user_id,
+            "user_name": user.name
+        }
+
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        cursor.close()
