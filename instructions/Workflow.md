@@ -19,13 +19,11 @@ git remote add upstream https://github.com/TEAM_ORG/market-connect-api.git
 
 # Prevent accidental direct pushes to the main repo
 git remote set-url --push upstream no_push
-
 ```
 
 4. **Configure Rebase Behavior** (Saves headaches later):
 ```bash
 git config pull.rebase true
-
 ```
 ---
 
@@ -38,7 +36,6 @@ git config pull.rebase true
 git checkout main
 git fetch upstream
 git rebase upstream/main
-
 ```
 
 *(Translation: "Download the team's latest work and update my local main to match exactly.")*
@@ -46,7 +43,6 @@ git rebase upstream/main
 ```bash
 # Naming convention: feature/name-of-task or fix/bug-name
 git checkout -b feature/booking-logic
-
 ```
 ---
 
@@ -58,13 +54,11 @@ git checkout -b feature/booking-logic
 2. **Stage your files:**
 ```bash
 git add .
-
 ```
 
 3. **Commit (Save snapshot):**
 ```bash
 git commit -m "Add booking logic to database.py"
-
 ```
 ---
 
@@ -77,7 +71,6 @@ git commit -m "Add booking logic to database.py"
 ```bash
 git fetch upstream
 git rebase upstream/main
-
 ```
 
 * *If no conflicts:* Great! Move to step 2.
@@ -86,7 +79,6 @@ git rebase upstream/main
 2. **Push to YOUR fork:**
 ```bash
 git push origin feature/booking-logic
-
 ```
 
 *(Note: If you rebased in step 1 and had previously pushed this branch, you might need to use `git push -f origin feature/booking-logic`)*.
