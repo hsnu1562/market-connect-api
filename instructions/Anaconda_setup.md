@@ -7,13 +7,13 @@ It allows you to create different coding environment for different projects, pre
 
 ## how to install Anaconda?
 0.  to check if you already got Anaconda installed, type in:
-    ```
+    ```bash
     conda --version
     ```
     if it returns a version number, you're good to go :D
     if it returns an error, follow the steps below to install Anaconda
 
-1.  go to the link [anaconda.com][anaconda_link], scroll to the bottom to find "miniconda installer", click on the download button
+1.  go to [anaconda.com][anaconda_link], scroll to the bottom to find "miniconda installer", click on the download button
 
 2.  after installing the installer, execute the installer by double-clicking it. and agree all the terms, also DO THE INITALIZE SETUP
 
@@ -57,31 +57,33 @@ It allows you to create different coding environment for different projects, pre
 
 2. install the following packages:
 
-- python 3.11.3 (you should already have this installed when setting up the environment)
-- psycopg2
-    ```bash
-    pip install psycopg2-binary
-    ```
-- dotenv
-    ```bash
-    pip install python-dotenv
-    ```
-- fastapi
-    ```bash
-    pip install fastapi "uvicorn[standard]"
-    ```
-- psql \n
-    for windows:\n
-    go to [official website of PostgreSQL][PSQL_link] and install the version 18.1 for windows
+### python 3.11.3 
+you should already have this installed when creating the environment
+### psycopg2
+```bash
+pip install psycopg2-binary
+```
+### dotenv
+```bash
+pip install python-dotenv
+```
+### fastapi
+```bash
+pip install fastapi "uvicorn[standard]"
+```
+### psql
 
-    [PSQL_link]:https://www.postgresql.org/download/windows/
+for windows: <br>
+go to [official website of PostgreSQL][PSQL_link] and install the version 18.1 for windows
 
-    for mac:
-    ```bash
-    brew install libpq
+[PSQL_link]:https://www.postgresql.org/download/windows/
 
-    # For Intel Macs
-    echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
-    # Or for Apple Silicon (M1/M2/M3) Macs
-    echo 'export PATH="/opt/homebrew/opt/libpq/bin:$PATH"' >> ~/.zshrc
-    ```
+for mac:
+```bash
+brew install libpq
+
+# For Intel Macs
+echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
+# Or for Apple Silicon (M1/M2/M3) Macs
+echo 'export PATH="/opt/homebrew/opt/libpq/bin:$PATH"' >> ~/.zshrc
+```
