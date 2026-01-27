@@ -1,3 +1,7 @@
+# /get_users: Endpoint to retrieve all users
+# /create_user: Endpoint to create a new user
+# /delete_user: Endpoint to delete a user
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from utils.database import get_db_connection

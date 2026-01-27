@@ -1,3 +1,6 @@
+# /get_bookings: Endpoint to retrieve all bookings
+# /delete_booking: Endpoint to delete a booking
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from utils.database import get_db_connection

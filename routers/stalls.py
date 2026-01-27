@@ -1,3 +1,7 @@
+# /get_stalls: Endpoint to retrieve all stalls
+# /create_stall: Endpoint to create a new stall
+# /delete_stall: Endpoint to delete a stall
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from utils.database import get_db_connection

@@ -1,3 +1,5 @@
+# /get_available_slots: Endpoint to retrieve all available slots
+
 from fastapi import APIRouter, Depends, HTTPException
 from utils.database import get_db_connection
 

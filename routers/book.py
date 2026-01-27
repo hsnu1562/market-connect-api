@@ -1,3 +1,5 @@
+# /book: Endpoint to book a stall slot
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from utils.database import get_db_connection

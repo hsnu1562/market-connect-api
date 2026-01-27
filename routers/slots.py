@@ -1,3 +1,7 @@
+# /get_slots: Endpoint to retrieve all slots
+# /create_slot: Endpoint to create a new slot
+# /delete_slot: Endpoint to delete a slot
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from utils.database import get_db_connection
