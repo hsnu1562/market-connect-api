@@ -30,7 +30,7 @@ stores the location name, latitude and longitude, facilities, and owner id
 - `facilities`: plain text. the facilities avilable at the location (eg: water, electricity)
 - `owner_id`: integer. the stall's owner's id
 
-### `availability`
+### `slots`
 stores the stall id, date, price, and the avilability status for the stall.
 - `slot_id`: auto generated integer. start from 1, and keep adding as new stalls added
 - `stall_id`: integer, auto linked to `stall_id` on the table `stalls`

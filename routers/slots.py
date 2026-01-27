@@ -4,28 +4,28 @@ from utils.database import get_db_connection
 
 router = APIRouter()
 
-@router.get("/get_availability")
-def get_availability( conn = Depends(get_db_connection) ):
+@router.get("/get_slots")
+def get_slots( conn = Depends(get_db_connection) ):
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM availability;")
-        availability = cursor.fetchall()
+        cursor.execute("SELECT * FROM slots;")
+        slots = cursor.fetchall()
         cursor.close()
-        return availability
+        return slots
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error fetching availability: {e}")
+        raise HTTPException(status_code=500, detail=f"Error fetching slots: {e}")
 
-class CreateAvailabilityRequest(BaseModel):
+class CreateSlotsRequest(BaseModel):
     stall_id: int
     date: str
     price: int
-@router.post("/create_availability")
-def create_availability( request: CreateAvailabilityRequest, conn = Depends(get_db_connection) ):
+@router.post("/create_slots")
+def create_slots( request: CreateSlotsRequest, conn = Depends(get_db_connection) ):
     cursor = conn.cursor()
     try:
         cursor.execute(
             """
-            INSERT INTO availability (stall_id, date, price, status) 
+            INSERT INTO slots (stall_id, date, price, status) 
             VALUES (%s, %s, %s, 0) 
             RETURNING slot_id;
             """,
@@ -35,7 +35,7 @@ def create_availability( request: CreateAvailabilityRequest, conn = Depends(get_
         conn.commit()
         return {
             "status": "success",
-            "message": "Availability slot created successfully!",
+            "message": "slot created successfully!",
             "slot_id": new_slot_id,
             "stall_id": request.stall_id,
             "date": request.date,
@@ -48,24 +48,24 @@ def create_availability( request: CreateAvailabilityRequest, conn = Depends(get_
     finally:
         cursor.close()
 
-class DeleteAvailabilityRequest(BaseModel):
+class DeleteSlotsRequest(BaseModel):
     slot_id: int
-@router.post("/delete_availability")
-def delete_availability( request: DeleteAvailabilityRequest, conn = Depends(get_db_connection) ):
+@router.post("/delete_slots")
+def delete_slots( request: DeleteSlotsRequest, conn = Depends(get_db_connection) ):
     cursor = conn.cursor()
     try:
         cursor.execute(
-            "DELETE FROM availability WHERE slot_id = %s;",
+            "DELETE FROM slots WHERE slot_id = %s;",
             (request.slot_id,)
         )
         if cursor.rowcount == 0:
             conn.rollback()
-            raise HTTPException(status_code=404, detail="Availability slot not found")
+            raise HTTPException(status_code=404, detail="Slots slot not found")
         
         conn.commit()
         return {
             "status": "success",
-            "message": "Availability slot deleted successfully!"
+            "message": "Slots slot deleted successfully!"
         }
     except Exception as e:
         conn.rollback()
