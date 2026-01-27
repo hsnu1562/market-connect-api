@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS stalls (
     facilities TEXT,                        -- e.g., "Electricity, Water"
     owner_id INTEGER                        -- In real life, you'd link this to an Admin table
 );
--- 3. Availability Table (The Inventory - Time Slots)
-CREATE TABLE IF NOT EXISTS availability (
+-- 3. Slots Table (The Inventory - Time Slots)
+CREATE TABLE IF NOT EXISTS slots (
     slot_id SERIAL PRIMARY KEY,
     stall_id INTEGER REFERENCES stalls(stall_id), -- Foreign Key: Links to Stalls table
     date DATE NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS availability (
 -- 4. Bookings Table (The Transaction Record)
 CREATE TABLE IF NOT EXISTS bookings (
     booking_id SERIAL PRIMARY KEY,
-    slot_id INTEGER REFERENCES availability(slot_id), -- Foreign Key
+    slot_id INTEGER REFERENCES slots(slot_id), -- Foreign Key
     user_id INTEGER REFERENCES users(user_id),       -- Foreign Key
     payment_status VARCHAR(20) DEFAULT 'PENDING',
     qr_token VARCHAR(100),

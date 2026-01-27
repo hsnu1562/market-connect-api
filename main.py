@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from utils.database import get_db_connection
 from pydantic import BaseModel
 from enum import Enum
-from routers import users, stalls, availability, bookings
+from routers import users, stalls, slots, bookings
 
 class SlotStatus(Enum):
     AVAILABLE = 0
@@ -22,20 +22,20 @@ def read_root():
 
 app.include_router(users.router)
 app.include_router(stalls.router)
-app.include_router(availability.router)
+app.include_router(slots.router)
 app.include_router(bookings.router)
 
 
 
 class BookingRequest(BaseModel):
-    slot_id: int
     user_id: int
+    slot_id: int
 @app.post("/book")
 def book_stall( request: BookingRequest, conn = Depends(get_db_connection) ):
     cursor = conn.cursor()
     try:
         cursor.execute(
-            "SELECT status FROM availability WHERE slot_id = %s FOR UPDATE;", 
+            "SELECT status FROM slots WHERE slot_id = %s FOR UPDATE;", 
             (request.slot_id,)
         )
         row = cursor.fetchone()
@@ -50,7 +50,7 @@ def book_stall( request: BookingRequest, conn = Depends(get_db_connection) ):
             raise HTTPException(status_code=409, detail="Too slow! This slot is already booked.")
         
         cursor.execute(
-            "UPDATE availability SET status = %s WHERE slot_id = %s;",
+            "UPDATE slots SET status = %s WHERE slot_id = %s;",
             (SlotStatus.BOOKED.value, request.slot_id)
         )
         cursor.execute(
@@ -92,7 +92,7 @@ def get_available_slots( conn = Depends(get_db_connection) ):
             a.date,
             a.price,
             a.status
-        FROM availability a
+        FROM slots a
         JOIN stalls s ON a.stall_id = s.stall_id
         WHERE a.status = 0;
         """
