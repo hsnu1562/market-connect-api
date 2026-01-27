@@ -4,7 +4,7 @@ this file tells you about the name, purpose, and the contents for each db tables
 ## all DB tables
 - users (communication info and reputation)
 - stalls (location, facilities, and owner)
-- availability (time and price)
+- slots (time and price)
 - bookings (transaction records)
 
 ## purpose and content for each table
@@ -42,7 +42,7 @@ stores the stall id, date, price, and the avilability status for the stall.
 ### `bookings`
 stores the booked informations, including the slot, the user (renter), payment status, qr code token, and the time the deal is made.
 - `booking_id`: auto generated integer. start from 1, and keep adding as new deals being made
-- `slot_id`: integer, auto linked to the `slot_id` on the table `availability`.
+- `slot_id`: integer, auto linked to the `slot_id` on the table `slots`.
 - `user_id`: integer, auto linked to the `user_id` on the table `user`.
 - `payment_status`: string, upto 20 characters, default as "PENDING". to track whether the money is paid
 - `qr_token`: string, upto 100 characters. the qr code token
