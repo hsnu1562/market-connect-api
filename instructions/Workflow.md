@@ -21,6 +21,8 @@ git remote add upstream https://github.com/TEAM_ORG/market-connect-api.git
 git remote set-url --push upstream no_push
 ```
 
+(replace **TEAM_ORG** with **hsnu_1562**)
+
 4. **Configure Rebase Behavior** (Saves headaches later):
 ```bash
 git config pull.rebase true
